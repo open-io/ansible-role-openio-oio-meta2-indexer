@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+[meta2-indexer]
+namespace = {{ openio_meta2_indexer_namespace }}
+report_interval = {{ openio_meta2_indexer_report_interval }}
+interval = {{ openio_meta2_indexer_interval }}
+scanned_per_second = {{ openio_meta2_indexer_scanned_per_second }}
+user = openio
+log_level = INFO                                
+log_facility = LOG_LOCAL0
+log_address = /dev/log
+syslog_prefix = OIO,{{ openio_meta2_indexer_namespace }},oio-meta2-indexer,{{ openio_meta2_indexer_serviceid }}
+try_removing_faulty_indexes = False             
+autocreate = true
+volume_list = "{{ ','.join(openio_meta2_indexer_volume_list) }}"

@@ -1,0 +1,86 @@
+# roles/meta2_indexer/tasks/main.yml
+---
+- name: "Include {{ ansible_distribution }} variables"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags: install
+
+- name: Create the 'openio' group
+  group:
+    name: openio
+    gid: "{{ openio_group_openio_gid | default('220')}}"
+  tags: install
+
+- name: Create the 'openio' user
+  user:
+    name: openio
+    comment: "openio account"
+    uid: "{{ openio_user_openio_uid | default('120')}}"
+    group: openio
+  tags: install
+
+- name: "Include {{ ansible_distribution }} tasks"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags: install
+
+- name: Test directories presence
+  stat:
+    path: "{{ item }}"
+  register: _dir
+  with_items:
+    - "/etc/gridinit.d/{{ openio_meta2_indexer_namespace }}"
+    - "{{ openio_meta2_indexer_sysconfig_dir }}/oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}"
+    - "{{ openio_meta2_indexer_volume_list }}"
+
+- name: Ensure directories exists
+  file:
+    path: "{{ item.item }}"
+    state: directory
+    owner: openio
+    group: openio
+    mode: 0755
+    recurse: true
+  with_items: "{{ _dir.results }}"
+  when: not item.stat.exists
+  tags: install
+
+- name: Ensure log directory
+  file:
+    path: "/var/log/oio/sds/{{ openio_meta2_indexer_namespace }}/oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}"
+    state: directory
+    owner: "{{ syslog_user }}"
+    group: openio
+    mode: 0750
+    recurse: true
+  tags: install
+
+- name: Generate configuration files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: openio
+    group: openio
+    mode: 0644
+  with_items:
+    - src: "meta2_indexer.conf.j2"
+      dest: "{{ openio_meta2_indexer_sysconfig_dir }}/\
+        oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}/oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}.conf"
+    - src: "gridinit_meta2_indexer.conf.j2"
+      dest: "{{ openio_meta2_indexer_gridinit_dir }}/{{ openio_meta2_indexer_gridinit_file_prefix }}\
+        oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}.conf"
+  register: _meta2_indexer_conf
+
+- name: restart meta2_indexer
+  shell: |
+    gridinit_cmd reload
+    gridinit_cmd restart  {{openio_meta2_indexer_namespace}}-oio-meta2-indexer-{{openio_meta2_indexer_serviceid}}
+  when:
+    - _meta2_indexer_conf.changed
+    - not openio_meta2_indexer_provision_only
+  tags: configure
+...

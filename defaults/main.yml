@@ -1,0 +1,19 @@
+# roles/meta2_indexer/defaults/main.yml
+---
+openio_meta2_indexer_namespace: "OPENIO"
+openio_meta2_indexer_serviceid: "0"
+
+openio_meta2_indexer_gridinit_dir: "/etc/gridinit.d/{{ openio_meta2_indexer_namespace }}"
+openio_meta2_indexer_gridinit_file_prefix: ""
+
+openio_meta2_indexer_report_interval: 5
+openio_meta2_indexer_scanned_per_second: 2
+openio_meta2_indexer_interval: 3000
+#openio_meta2_indexer_bind_interface: "{{ ansible_default_ipv4.alias }}"
+#openio_meta2_indexer_bind_address:
+#  "{{ hostvars[inventory_hostname]['ansible_' + openio_meta2_indexer_bind_interface]['ipv4']['address'] }}"
+
+openio_meta2_indexer_provision_only: false
+openio_meta2_indexer_location: "{{ ansible_hostname }}.{{ openio_meta2_indexer_serviceid }}"
+openio_meta2_indexer_volume_list: []
+...

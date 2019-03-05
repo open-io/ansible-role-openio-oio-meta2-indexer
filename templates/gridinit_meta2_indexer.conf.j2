@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+[Service.{{ openio_meta2_indexer_namespace }}-oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}]
+group={{ openio_meta2_indexer_namespace }},oio-meta2-indexer,{{ openio_meta2_indexer_serviceid }}
+command=/usr/bin/oio-meta2-indexer {{ openio_meta2_indexer_sysconfig_dir }}/oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}/oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}.conf
+enabled=true
+start_at_boot=true
+on_die=respawn
+uid=openio
+gid=openio
+env.PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
