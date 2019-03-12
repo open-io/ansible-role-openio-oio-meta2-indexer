@@ -18,4 +18,7 @@
       openio_gridinit_per_ns: true
     - role: role_under_test
       openio_meta2_indexer_namespace: "{{ NS }}"
+      openio_meta2_indexer_volume_list:
+        - /mnt/foo/TRAVIS/meta2-0
+        - /mnt/bar/TRAVIS/meta2-1
 ...
