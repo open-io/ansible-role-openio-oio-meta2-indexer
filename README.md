@@ -13,16 +13,15 @@ An Ansible role for OpenIO oio-meta2-indexer. Specifically, the responsibilities
 
 | Variable   | Default | Comments (type)  |
 | :---       | :---    | :---             |
-| `openio_meta2_indexer_scanned_per_second` | `2` | ... |
-| `openio_meta2_indexer_gridinit_dir` | `"/etc/gridinit.d/{{ openio_meta2_indexer_namespace }}"` | ... |
-| `openio_meta2_indexer_gridinit_file_prefix` | `""` | ... |
-| `openio_meta2_indexer_interval` | `3000` | ... |
-| `openio_meta2_indexer_location` | `"{{ ansible_hostname }}.{{ openio_meta2_indexer_serviceid }}"` | ... |
-| `openio_meta2_indexer_namespace` | `"OPENIO"` | ... |
-| `openio_meta2_indexer_provision_only` | `false` | ... |
-| `openio_meta2_indexer_report_interval` | `5` | ... |
-| `openio_meta2_indexer_serviceid` | `"0"` | ... |
-| `openio_meta2_indexer_volume_list` | `[]` | ... |
+| `openio_meta2_indexer_scanned_per_second` | `2` | Maximum of scanned databases per second per volume, beyond which the scanning process is throttled for said volume. |
+| `openio_meta2_indexer_gridinit_dir` | `"/etc/gridinit.d/{{ openio_meta2_indexer_namespace }}"` | Path to copy the gridinit conf |
+| `openio_meta2_indexer_gridinit_file_prefix` | `""` | Maybe set it to {{ openio_memcached_namespace }}- for old gridinit's style |
+| `openio_meta2_indexer_interval` | `3000` | Time between two full scans for each volume |
+| `openio_meta2_indexer_namespace` | `"OPENIO"` | Namespace |
+| `openio_meta2_indexer_provision_only` | `false` | Provision only without restarting services |
+| `openio_meta2_indexer_report_interval` | `5` | Time between progress reports for each volume |
+| `openio_meta2_indexer_serviceid` | `"0"` | ID in gridinit |
+| `openio_meta2_indexer_volume_list` | `[]` | List of paths pointing to meta2 volumes to index |
 
 ## Dependencies
 
