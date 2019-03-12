@@ -1,6 +1,6 @@
 ---
 openio_meta2_indexer_sysconfig_dir: "/etc/oio/sds/{{ openio_meta2_indexer_namespace }}"
-openio_meta2_indexer_servicename: "meta2_indexer-{{ openio_meta2_indexer_serviceid }}"
+openio_meta2_indexer_servicename: "oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}"
 
 openio_meta2_indexer_definition_file: >
   "{{ openio_meta2_indexer_sysconfig_dir }}/
