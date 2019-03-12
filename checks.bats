@@ -5,11 +5,10 @@
 
 # Tests
 
-#@test 'NAME - test1' {
-#  run bash -c "docker exec -ti ${SUT_ID} cat /etc/foo"
-#  echo "output: "$output
-#  echo "status: "$status
-#  [[ "${status}" -eq "0" ]]
-#  [[ "${output}" =~ 'String in the output1' ]]
-#  [[ "${output}" =~ 'String in the output2' ]]
-#}
+@test 'Volumes list' {
+  run bash -c "docker exec -ti ${SUT_ID} cat /etc/oio/sds/TRAVIS/oio-meta2-indexer-0/oio-meta2-indexer-0.conf"
+  echo "output: "$output
+  echo "status: "$status
+  [[ "${status}" -eq "0" ]]
+  [[ "${output}" =~ '"/mnt/foo/TRAVIS/meta2-0,/mnt/bar/TRAVIS/meta2-1"' ]]
+}
