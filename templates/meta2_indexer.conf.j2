@@ -11,4 +11,4 @@ log_address = /dev/log
 syslog_prefix = OIO,{{ openio_meta2_indexer_namespace }},oio-meta2-indexer,{{ openio_meta2_indexer_serviceid }}
 try_removing_faulty_indexes = False             
 autocreate = true
-volume_list = "{{ ','.join(openio_meta2_indexer_volume_list) }}"
+volume_list = {{ ','.join(openio_meta2_indexer_volume_list) }}
