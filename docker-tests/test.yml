@@ -1,0 +1,23 @@
+# Test playbook
+---
+- hosts: all
+  become: true
+  vars:
+    NS: TRAVIS
+    openio_bootstrap: true
+  roles:
+    - role: users
+    - role: repo
+      openio_repository_no_log: false
+      openio_repository_mirror_host: mirror2.openio.io
+    - role: gridinit
+      openio_gridinit_namespace: "{{ NS }}"
+      openio_gridinit_per_ns: true
+    - role: namespace
+      openio_namespace_name: "{{ NS }}"
+    - role: role_under_test
+      openio_meta2_indexer_namespace: "{{ NS }}"
+      openio_meta2_indexer_volume_list:
+        - /mnt/foo/TRAVIS/meta2-0
+        - /mnt/bar/TRAVIS/meta2-1
+...
