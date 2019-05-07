@@ -46,12 +46,24 @@
   register: _meta2_indexer_conf
   tags: configure
 
-- name: restart meta2_indexer
+- name: "restart meta2_indexer to apply the new configuration"
   shell: |
     gridinit_cmd reload
     gridinit_cmd restart  {{ openio_meta2_indexer_namespace }}-{{ openio_meta2_indexer_servicename }}
+  register: _restart_meta2_indexer
   when:
-    - _meta2_indexer_conf.changed
+    - _meta2_indexer_conf is changed
     - not openio_meta2_indexer_provision_only
   tags: configure
+
+- block:
+    - name: "Ensure meta2_indexer is started"
+      command: gridinit_cmd start {{ openio_meta2_indexer_namespace }}-{{ openio_meta2_indexer_servicename }}
+      register: _start_meta2_indexer
+      changed_when: '"Success" in _start_meta2_indexer.stdout'
+      when:
+        - not openio_meta2_indexer_provision_only
+        - _restart_meta2_indexer is skipped
+      tags: configure
+  when: openio_bootstrap | d(false)
 ...
