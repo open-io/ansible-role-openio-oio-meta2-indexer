@@ -10,5 +10,5 @@
   echo "output: "$output
   echo "status: "$status
   [[ "${status}" -eq "0" ]]
-  [[ "${output}" =~ '"/mnt/foo/TRAVIS/meta2-0,/mnt/bar/TRAVIS/meta2-1"' ]]
+  [[ "${output}" =~ '/mnt/foo/TRAVIS/meta2-0,/mnt/bar/TRAVIS/meta2-1' ]]
 }
