@@ -19,6 +19,7 @@ An Ansible role for OpenIO oio-meta2-indexer. Specifically, the responsibilities
 | `openio_meta2_indexer_interval` | `3000` | Time between two full scans for each volume |
 | `openio_meta2_indexer_namespace` | `"OPENIO"` | Namespace |
 | `openio_meta2_indexer_provision_only` | `false` | Provision only without restarting services |
+| `openio_meta2_indexer_package_upgrade` | `false` | Set the packages to the latest version (to be set in extra_vars) |
 | `openio_meta2_indexer_report_interval` | `5` | Time between progress reports for each volume |
 | `openio_meta2_indexer_serviceid` | `"0"` | ID in gridinit |
 | `openio_meta2_indexer_volume_list` | `[]` | List of paths pointing to meta2 volumes to index |
