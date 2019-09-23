@@ -11,5 +11,6 @@ openio_meta2_indexer_scanned_per_second: 2
 openio_meta2_indexer_interval: 3000
 
 openio_meta2_indexer_provision_only: false
+openio_meta2_indexer_package_upgrade: "{{ openio_package_upgrade | d(false) }}"
 openio_meta2_indexer_volume_list: []
 ...
