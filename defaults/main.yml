@@ -1,4 +1,3 @@
-# roles/meta2_indexer/defaults/main.yml
 ---
 openio_meta2_indexer_namespace: "OPENIO"
 openio_meta2_indexer_serviceid: "0"
@@ -13,4 +12,11 @@ openio_meta2_indexer_interval: 3000
 openio_meta2_indexer_provision_only: false
 openio_meta2_indexer_package_upgrade: "{{ openio_package_upgrade | d(false) }}"
 openio_meta2_indexer_volume_list: []
+
+openio_meta2_indexer_sysconfig_dir: "/etc/oio/sds/{{ openio_meta2_indexer_namespace }}"
+openio_meta2_indexer_servicename: "oio-meta2-indexer-{{ openio_meta2_indexer_serviceid }}"
+
+openio_meta2_indexer_definition_file: >
+  "{{ openio_meta2_indexer_sysconfig_dir }}/
+  {{ openio_meta2_indexer_servicename }}/{{ openio_meta2_indexer_servicename }}.conf"
 ...
