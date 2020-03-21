@@ -1,15 +1,15 @@
 ---
-openio_meta2_indexer_namespace: "OPENIO"
+openio_meta2_indexer_namespace: "{{ namespace | default('OPENIO') }}"
 openio_meta2_indexer_serviceid: "0"
 
-openio_meta2_indexer_gridinit_dir: "/etc/gridinit.d/{{ openio_meta2_indexer_namespace }}"
-openio_meta2_indexer_gridinit_file_prefix: ""
+openio_meta2_indexer_gridinit_dir: "{{ openio_gridinit_d | d('/etc/gridinit.d/') }}"
+openio_meta2_indexer_gridinit_file_prefix: "{{ openio_meta2_indexer_namespace }}-"
 
 openio_meta2_indexer_report_interval: 5
 openio_meta2_indexer_scanned_per_second: 2
 openio_meta2_indexer_interval: 3000
 
-openio_meta2_indexer_provision_only: false
+openio_meta2_indexer_provision_only: "{{ openio_maintenance_mode | d(false) | bool }}"
 openio_meta2_indexer_package_upgrade: "{{ openio_package_upgrade | d(false) }}"
 openio_meta2_indexer_volume_list: []
 
