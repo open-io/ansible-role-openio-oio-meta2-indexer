@@ -24,7 +24,6 @@
     group: "{{ item.group | default('openio') }}"
     mode: "{{ item.mode | default(0755) }}"
   with_items:
-    - path: "/etc/gridinit.d/{{ openio_meta2_indexer_namespace }}"
     - path: "{{ openio_meta2_indexer_sysconfig_dir }}/{{ openio_meta2_indexer_servicename }}"
     - path: "/var/log/oio/sds/{{ openio_meta2_indexer_namespace }}/{{ openio_meta2_indexer_servicename }}"
       owner: "{{ syslog_user }}"
