@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-oio-meta2-indexer.svg?branch=master)](https://travis-ci.org/open-io/ansible-role-openio-oio-meta2-indexer)
+[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-oio-meta2-indexer.svg?branch=20.04)](https://travis-ci.org/open-io/ansible-role-openio-oio-meta2-indexer)
 # Ansible role `meta2_indexer`
 
 An Ansible role for OpenIO oio-meta2-indexer. Specifically, the responsibilities of this role are to:
